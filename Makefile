@@ -67,3 +67,9 @@ vm/switch:
 
 vm/hardware:
 	scp $(SSH_OPTIONS) -p$(NIXPORT) $(NIXUSER)@$(NIXADDR):/etc/nixos/hardware-configuration.nix .
+
+switch:
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild switch --flake ".#${NIXNAME}"
+
+test:
+	sudo NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nixos-rebuild test --flake ".#$(NIXNAME)"
