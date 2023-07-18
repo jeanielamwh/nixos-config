@@ -1,26 +1,36 @@
-{ modulesPath, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [
-    "${modulesPath}/virtualisation/amazon-image.nix"
+  imports =
+  [
+    ./hardware-configuration.nix
+    ./user.nix
   ];
 
-  ec2.efi = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
-  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
 
   environment.systemPackages = with pkgs; [
+    git
+    tmux
     vim
   ];
 
-  users.users.wlam183 = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOw5/GzuHsp2eG32mOVOybQsfDnUAWNcFxZg8GusUUfNfx+d9D4I1jB6n7u6V48YOpbh219yWEhvmW/vC/Ivo+90ET0WWNOWdyXU17loLGiCHMpuT9rcbhA0HQSRtQzFj+BR5Da/7+gsmtnExlDhfAkMtjRKbvL+/hm/zpWCLuNqYSfiOrkTQ9xa3E3h/WzP/32ytDw/As5+p6pmXqL6hNw16ThiFQW3QxgBfYh6Q4841rZlyDDy58pocxAK0E+X28y6AjycEoFPhbsvwLX7yA2ivyc/hrIalnDmwJl0wuiINnUpm+upyPAxE8IYbdvav3SNcFWW3BLcNN+clOeZ1D8LbMiwEpwPttHlwHuFmSwDwSUe3/UqK3RNpEM5KemHKYbzz39N2LxxMXDm4XXMMCIz9/rtRzlmJZGgcU529N/Y5W+nHUUMfwzUa0zHzWV7QfT6gXgabwtXK+hstQN3FGQNanbP+vjm2Gx1XqUubbTUPD4FVL/x1zt7OQsFUZNG8= wlam183@C02FL41YMD6R" ];
-    shell = pkgs.zsh;
-  };
-
-  programs.zsh.enable = true;
+  services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
