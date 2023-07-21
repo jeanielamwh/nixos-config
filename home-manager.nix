@@ -10,6 +10,14 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      env.TERM = "xterm-256color";
+      font.size = 12;
+    };
+  };
+
   programs.git = {
     enable = true;
     userName  = "Jeanie Lam";
@@ -40,6 +48,13 @@
     '';
     mouse = true;
     prefix = "C-a";
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+    ];
   };
 
   programs.zsh.enable = true;
