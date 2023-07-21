@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, modulesPath, ... }:
 
 {
   imports =
   [
+    (modulesPath + "/virtualisation/parallels-guest.nix")
     ./hardware-configuration.nix
     ./user.nix
   ];
@@ -24,27 +25,19 @@
     };
   };
 
-  services.xserver = {
-    enable = true;
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager = {
-      defaultSession = "none+i3";
-      lightdm.enable = true;
-    };
-
-    windowManager.i3.enable = true;
-  };
-
   environment.systemPackages = with pkgs; [
     git
     gnumake
     tmux
     vim
+    wayland
   ];
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS="1";
+  };
+
+  programs.hyprland.enable = true;
 
   services.openssh.enable = true;
 
