@@ -25,17 +25,9 @@
 
   programs.neovim = {
     enable = true;
-    extraConfig = ''
-      set expandtab smarttab autoindent
-      set nohlsearch
-      set number
-      set relativenumber
-      set tabstop=4 softtabstop=4 shiftwidth=4
-      set title
-      '';
-      defaultEditor = true;
-      vimAlias = true;
-    };
+    defaultEditor = true;
+    vimAlias = true;
+  };
 
   programs.tmux = {
     enable = true;
@@ -58,7 +50,9 @@
 
   programs.zsh.enable = true;
 
-  home.file.".config/hypr/hyprland.conf".source = ./conf/hyprland.conf;
+  home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
+  home.file.".config/hypr/hyprland.conf".source = ./conf/hypr/hyprland.conf;
+  home.file.".config/nvim/init.vim".source = ./conf/vim/init.vim;
 
   home.stateVersion = "23.05"; # Please read the comment before changing.
 }

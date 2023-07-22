@@ -1,0 +1,14 @@
+{
+    // appearance
+    "window.menuBarVisibility": "toggle",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Tokyo Night",
+    // vim
+    "vim.vimrc.enable": true,
+    "vim.smartRelativeLine": true,
+    // files
+    "files.autoSave": "afterDelay",
+    "files.associations": {
+        "*.nix": "ruby"
+    }
+}
