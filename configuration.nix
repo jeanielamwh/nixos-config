@@ -30,7 +30,7 @@
     gnumake
     tmux
     vim
-    wayland
+    wofi
   ];
 
   environment.sessionVariables = {
