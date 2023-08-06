@@ -4,7 +4,7 @@ NIXPORT ?= 22
 NIXUSER ?= root
 
 # The name of the nixosConfiguration in the flake
-NIXNAME ?= vm-parallel
+NIXNAME ?= desktop
 
 # Get the path to this Makefile and directory
 MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
