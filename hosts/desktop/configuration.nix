@@ -28,6 +28,7 @@
     gnumake
     tmux
     vim
+    wl-clipboard
     wofi
   ];
 
