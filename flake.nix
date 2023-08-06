@@ -16,19 +16,39 @@
       # We want to use the same set of nixpkgs as our system.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
     nixosConfigurations.vm-parallel = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.funsun = import ./home-manager.nix;
-        }
+        # home-manager.nixosModules.home-manager {
+        #   home-manager.useGlobalPkgs = true;
+        #   home-manager.useUserPackages = true;
+        #   home-manager.users.funsun = import ./home-manager.nix;
+        # }
       ];
+    };
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [
+        ./hosts/desktop/configuration.nix
+      ];
+    };
+
+    homeConfigurations = {
+      "funsun@desktop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+	  hyprland.homeManagerModules.default
+	  ./home-manager.nix
+        ];
+      };
     };
   };
 }
