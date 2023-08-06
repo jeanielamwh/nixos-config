@@ -4,7 +4,10 @@
   # environment.
   home.packages = with pkgs; [
     tree
+    (nerdfonts.override { fonts = ["FiraCode" "Hack" "JetBrainsMono" "Noto"]; })
   ];
+
+  fonts.fontconfig.enable = true;
 
   home = {
     username = "funsun";
@@ -27,6 +30,10 @@
       env.TERM = "xterm-256color";
       font.size = 12;
     };
+  };
+
+  programs.chromium = {
+    enable = true;
   };
 
   programs.firefox.enable = true;

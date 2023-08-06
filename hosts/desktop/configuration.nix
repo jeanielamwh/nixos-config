@@ -32,6 +32,8 @@
     wofi
   ];
 
+  fonts.fontconfig.subpixel.rgba = "rgb"; # slightly better or placebo?
+
   programs.hyprland.enable = true;
 
   security.polkit.enable = true;
