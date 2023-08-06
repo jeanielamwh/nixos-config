@@ -1,5 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, hyprland, ... }@inputs :
 {
+  imports = [
+    hyprland.homeManagerModules.default
+  ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [

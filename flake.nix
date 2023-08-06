@@ -34,21 +34,18 @@
     };
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit nixpkgs home-manager hyprland; };
       modules = [
         ./hosts/desktop/configuration.nix
+        home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit hyprland; }; # if I don't add this line I get infinite recursion
+            users.funsun = import ./home-manager.nix;
+          };
+        }
       ];
-    };
-
-    homeConfigurations = {
-      "funsun@desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-	  hyprland.homeManagerModules.default
-	  ./home-manager.nix
-        ];
-      };
     };
   };
 }
