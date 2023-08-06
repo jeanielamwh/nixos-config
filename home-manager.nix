@@ -7,6 +7,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    lm_sensors
     tree
     (nerdfonts.override { fonts = ["FiraCode" "Hack" "JetBrainsMono" "Noto"]; })
   ];
@@ -68,9 +69,11 @@
 
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    extensions = pkgs.vscode-utils.extensionsFromVscodeMarketplace
+      (import ./conf/vscode/vscode-extensions.nix).extensions ++ (with pkgs.vscode-extensions; [
+      ms-vscode.cpptools
       vscodevim.vim
-    ];
+    ]);
   };
 
   programs.waybar = {
