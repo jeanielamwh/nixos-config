@@ -122,9 +122,9 @@
 }
 
 #workspaces button.active {
-    border-color: #9aa5ce;
+    border-color: #565f89;
     color: #c0caf5;
-    background-color: #565f89;
+    background-color: #414868;
 }
 
 #workspaces button.urgent {
