@@ -69,6 +69,18 @@
     ];
   };
 
+  programs.waybar = {
+    enable = true;
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 30;
+        modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+      };
+    };
+  };
+
   programs.zsh.enable = true;
 
   wayland.windowManager.hyprland = {
