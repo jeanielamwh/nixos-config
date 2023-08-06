@@ -15,6 +15,8 @@
   networking.hostName = "desktop";
   networking.networkmanager.enable = true;
 
+  time.timeZone = "Europe/London";
+
   nixpkgs.config.allowUnfree = true;
 
   nix = {
@@ -26,10 +28,20 @@
   environment.systemPackages = with pkgs; [
     git
     gnumake
+    killall
     tmux
     vim
+    waybar
     wl-clipboard
     wofi
+  ];
+
+  nixpkgs.overlays = [
+    (self: super: {
+      waybar = super.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      });
+    })
   ];
 
   fonts.fontconfig.subpixel.rgba = "rgb"; # slightly better or placebo?

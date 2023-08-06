@@ -80,9 +80,42 @@
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
+
+        modules-left = [ "wlr/workspaces" ];
+        modules-right = [ "memory" "cpu" "clock#time" "clock#date" ];
+
+        "clock#time" = {
+          interval = 1;
+          format = "{:%H:%M:%S}";
+          tooltip = false;
+        };
+
+        "clock#date" = {
+          interval = 10;
+          format = "{:%e %b %Y}";
+          tooltip-format = "{:%e %B %Y}";
+        };
+
+        "cpu" = {
+          interval = 5;
+          format = "cpu {usage}% ({load})";
+          states = {
+            warning = 70;
+            critical = 90;
+          };
+        };
+
+        "memory" = {
+          interval = 5;
+          format = "mem {}%";
+          states = {
+            warning = 70;
+            critical = 90;
+          };
+        };
       };
     };
+    style = builtins.readFile ./conf/waybar/style.css;
   };
 
   programs.zsh.enable = true;
