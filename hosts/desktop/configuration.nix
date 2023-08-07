@@ -43,6 +43,7 @@
     pavucontrol
     tmux
     vim
+    virt-manager
     waybar
     wl-clipboard
     wofi
@@ -63,6 +64,10 @@
   security.polkit.enable = true;
 
   services.openssh.enable = true;
+
+  programs.dconf.enable = true;
+
+  virtualisation.libvirtd.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -89,6 +89,13 @@
     extraConfig = builtins.readFile ./conf/hypr/hyprland.conf;
   };
 
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
+    };
+  };
+
   home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
   # home.file.".config/hypr/hyprland.conf".source = ./conf/hypr/hyprland.conf;
   home.file.".config/nvim/init.vim".source = ./conf/vim/init.vim;
