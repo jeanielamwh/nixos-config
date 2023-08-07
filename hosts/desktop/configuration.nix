@@ -12,6 +12,17 @@
     efi.canTouchEfiVariables = true;
   };
 
+  hardware.bluetooth.enable = true;
+
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   networking.hostName = "desktop";
   networking.networkmanager.enable = true;
 
@@ -29,6 +40,7 @@
     git
     gnumake
     killall
+    pavucontrol
     tmux
     vim
     waybar

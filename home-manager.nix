@@ -85,7 +85,7 @@
         height = 30;
 
         modules-left = [ "wlr/workspaces" ];
-        modules-right = [ "memory" "cpu" "clock#time" "clock#date" ];
+        modules-right = [ "memory" "cpu" "pulseaudio" "clock#time" "clock#date" ];
 
         "clock#time" = {
           interval = 1;
@@ -95,8 +95,8 @@
 
         "clock#date" = {
           interval = 10;
-          format = "{:%e %b %Y}";
-          tooltip-format = "{:%e %B %Y}";
+          format = "{:%Y-%m-%d}";
+          tooltip = false;
         };
 
         "cpu" = {
@@ -115,6 +115,12 @@
             warning = 70;
             critical = 90;
           };
+        };
+
+        "pulseaudio" = {
+          format = "{volume}%";
+          on-click = "pavucontrol";
+          tooltip = false;
         };
       };
     };
