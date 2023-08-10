@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     lm_sensors
     tree
+    vagrant
     (nerdfonts.override { fonts = ["FiraCode" "Hack" "JetBrainsMono" "Noto"]; })
   ];
 
