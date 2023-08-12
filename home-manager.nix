@@ -10,6 +10,7 @@
     ansible
     discord
     lm_sensors
+    signal-desktop
     tree
     vagrant
     (nerdfonts.override { fonts = ["FiraCode" "Hack" "JetBrainsMono" "Noto"]; })
@@ -20,6 +21,9 @@
   home = {
     username = "funsun";
     homeDirectory = "/home/funsun";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   nixpkgs = {
@@ -50,6 +54,10 @@
     enable = true;
     userName  = "Jeanie Lam";
     userEmail = "jeanielamwh@gmail.com";
+    aliases = {
+      ca = "commit --amend";
+      ldog = "log --decorate --oneline --graph";
+    };
   };
 
   programs.neovim = {
@@ -99,7 +107,8 @@
     };
   };
 
-  # home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
+  home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
+  home.file.".config/Code/User/keybindings.json".source = ./conf/vscode/keybindings.json;
   # home.file.".config/hypr/hyprland.conf".source = ./conf/hypr/hyprland.conf;
   home.file.".config/nvim/init.vim".source = ./conf/vim/init.vim;
 

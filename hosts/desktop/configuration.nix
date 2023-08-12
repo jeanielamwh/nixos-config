@@ -36,6 +36,8 @@
     };
   };
 
+  environment.variables.EDITOR = "nvim";
+
   environment.systemPackages = with pkgs; [
     git
     gnumake
@@ -47,6 +49,7 @@
     waybar
     wl-clipboard
     wofi
+    xdg-utils # required to open url from some desktop apps
   ];
 
   nixpkgs.overlays = [

@@ -1,8 +1,10 @@
 {
     // appearance
+    "editor.rulers": [ 100 ],
     "window.menuBarVisibility": "toggle",
     "window.zoomLevel": 1,
     "workbench.colorTheme": "Tokyo Night",
+    "workbench.activityBar.visible": false,
     // vim
     "vim.vimrc.enable": true,
     "vim.smartRelativeLine": true,
