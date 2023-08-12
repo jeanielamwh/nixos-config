@@ -7,6 +7,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    ansible
+    discord
     lm_sensors
     tree
     vagrant
@@ -97,7 +99,7 @@
     };
   };
 
-  home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
+  # home.file.".config/Code/User/settings.json".source = ./conf/vscode/settings.json;
   # home.file.".config/hypr/hyprland.conf".source = ./conf/hypr/hyprland.conf;
   home.file.".config/nvim/init.vim".source = ./conf/vim/init.vim;
 
