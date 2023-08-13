@@ -1,0 +1,69 @@
+- hosts: all
+  become: true
+  vars:
+    user: vagrant
+    os_release: bullseye
+    clojure_version: '1.11.1.1347'
+
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+  
+    - name: Update apt and install required system packages
+      apt:
+        pkg:
+          - gnupg
+          - tree
+          - neovim
+        state: latest
+        update_cache: true
+
+    - name:
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+  
+    - name:
+      get_url:
+        url: https://packages.adoptium.net/artifactory/api/gpg/key/public
+        dest: /etc/apt/keyrings/adoptium.asc
+
+    - name:
+      apt_repository:
+        repo: "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb {{ os_release }} main"
+        filename: adoptium
+        state: present
+    
+    - name:
+      apt:
+        pkg:
+          - temurin-17-jdk
+        update_cache: true
+        state: latest
+
+    - name: Download the Clojure installation script
+      get_url:
+        url: "https://download.clojure.org/install/linux-install-{{clojure_version}}.sh"
+        dest: "/tmp/linux-install-{{clojure_version}}.sh"
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Run the installation script
+      shell:
+        chdir: /tmp
+        cmd: /tmp/linux-install-{{clojure_version}}.sh
+  
+    - name: Download leiningen
+      get_url:
+        url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+        dest: /usr/local/bin/lein
+        owner: root
+        group: "{{ user }}"
+        mode: '0755'
+
+    - name: Install and start code-server
+      include_tasks: ./code-server.yml
