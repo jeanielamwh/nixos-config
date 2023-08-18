@@ -36,12 +36,16 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.alacritty = {
+  programs.kitty = {
     enable = true;
-    settings = {
-      env.TERM = "xterm-256color";
-      font.size = 12;
+    font = {
+      name = "Hack Nerd Font";
+      size = 12;
     };
+    settings = {
+      confirm_os_window_close = 0;
+    };
+    theme = "Tokyo Night";
   };
 
   programs.chromium = {
